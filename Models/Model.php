@@ -31,6 +31,17 @@ class Model
 
 // ----------------------------------PARTIE HOME--------------------------------------------//
 
+
+public function get_utilisateur(){
+    try {
+        $requete = $this->bd->prepare('SELECT * FROM utilisateur');
+        $requete->execute();
+        
+    } catch (PDOException $e) {
+        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+    }
+    return $requete->fetchAll(PDO::FETCH_OBJ);
+}
     
 
 // ----------------------------------PARTIE LIVRE--------------------------------------------//
@@ -125,14 +136,74 @@ class Model
     }
 
 
-    public function get_modifier_livres(){
-        // try{
-        //     $_GET['id'];
+    public function get_modifier_livres($idlivre){
+        try{
+      
+            $requete = $this->bd->prepare('SELECT * FROM livres WHERE Id_Livre = :a');
+            $requete->execute(array(':a'=>$idlivre));
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+        return $requete->fetchAll(PDO::FETCH_OBJ);
+    }
 
+    public function get_update_livre($id_livre, $isbn, $titre, $theme, $nbr_pages, $format, $nom_auteur, $prenom_auteur, $editeur, $annee_edition, $prix_vente, $langue) {
 
-        // }
+        try {
+            $requete = $this->bd->prepare('UPDATE livres 
+                                           SET ISBN = :isbn,
+                                               Titre_livre = :titre,
+                                               Theme_livre = :theme,
+                                               Nbr_pages_livre = :nbr_pages,
+                                               Format_livre = :format,
+                                               Nom_auteur = :nom_auteur,
+                                               Prenom_auteur = :prenom_auteur,
+                                               Editeur = :editeur,
+                                               Annee_edition = :annee_edition,
+                                               Prix_vente = :prix_vente,
+                                               Langue_livre = :langue
+                                           WHERE Id_Livre = :id_livre');
+            $requete->execute(array(
+                ':id_livre' => $id_livre,
+                ':isbn' => $isbn,
+                ':titre' => $titre,
+                ':theme' => $theme,
+                ':nbr_pages' => $nbr_pages,
+                ':format' => $format,
+                ':nom_auteur' => $nom_auteur,
+                ':prenom_auteur' => $prenom_auteur,
+                ':editeur' => $editeur,
+                ':annee_edition' => $annee_edition,
+                ':prix_vente' => $prix_vente,
+                ':langue' => $langue
+            ));
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage());
+        }
+    }
+    public function get_supprimer_livres($idlivre){
+       
+        try{
+      
+            $requete = $this->bd->prepare(' DELETE FROM `livres` WHERE  Id_Livre = :a');
+            $requete->execute(array(':a'=>$idlivre));
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+        return $requete->fetchAll(PDO::FETCH_OBJ);
     }
 // ----------------------------------PARTIE fournisseur--------------------------------------------//
+
+public function get_supprimer_fournisseurs($idfournisseur){
+    try{
+      
+        $requete = $this->bd->prepare(' DELETE FROM `fournisseurs` WHERE  Id_fournisseur = :a');
+        $requete->execute(array(':a'=>$idfournisseur));
+    } catch (PDOException $e) {
+        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+    }
+    return $requete->fetchAll(PDO::FETCH_OBJ);
+}
 public function get_all_fournisseurs()
 {
     try {
@@ -225,7 +296,53 @@ public function get_all_fournisseurs_find_pays()
     return $requete->fetchAll(PDO::FETCH_OBJ);
 }
 
+public function get_modifier_fournisseurs($idfournisseur){
+    try{
+  
+        $requete = $this->bd->prepare('SELECT * FROM fournisseurs WHERE Id_fournisseur = :a');
+        $requete->execute(array(':a'=>$idfournisseur));
+    } catch (PDOException $e) {
+        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+    }
+    return $requete->fetchAll(PDO::FETCH_OBJ);
+}
 
+public function get_update_fournisseurs($Id_fournisseur, $Code_fournisseur, $Raison_sociale, $Rue_fournisseur, $Code_postal, $Localite,
+ $Pays, $Tel_fournisseur, $Url_fournisseur, $Email_fournisseur, $Fax_fournisseur) {
+
+    try {
+        $requete = $this->bd->prepare('UPDATE fournisseurs 
+                                       SET Code_fournisseur = :Code_fournisseur,
+                                       Raison_sociale = :Raison_sociale,
+                                       Rue_fournisseur = :Rue_fournisseur,
+                                       Code_postal = :Code_postal,
+                                       Localite = :Localite,
+                                       Pays = :Pays,
+                                       Tel_fournisseur = :Tel_fournisseur,
+                                       Url_fournisseur = :Url_fournisseur,
+                                       Email_fournisseur = :Email_fournisseur,
+                                       Fax_fournisseur = :Fax_fournisseur
+                                       
+                                       WHERE Id_fournisseur = :Id_fournisseur');
+        $requete->execute(array(
+            ':Id_fournisseur' => $Id_fournisseur,
+            ':Code_fournisseur' => $Code_fournisseur,
+            
+            ':Raison_sociale' => $Raison_sociale,
+            ':Rue_fournisseur' => $Rue_fournisseur,
+            ':Code_postal' => $Code_postal,
+            ':Localite' => $Localite,
+            ':Pays' => $Pays,
+            ':Tel_fournisseur' => $Tel_fournisseur,
+            ':Url_fournisseur' => $Url_fournisseur,
+            ':Email_fournisseur' => $Email_fournisseur,
+            ':Fax_fournisseur' => $Fax_fournisseur
+            
+        ));
+    } catch (PDOException $e) {
+        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage());
+    }
+}
 
 // ----------------------------------PARTIE Commande--------------------------------------------//
 
@@ -346,17 +463,19 @@ public function get_inscription_valider(array $data){
     $today = date("Y-m-d");
     $Mdp = isset($_POST['mdp']) ? $_POST['mdp'] : "";
     $email=isset($_POST['email']) ? $_POST['email'] : "";
+    $utilisateur="Utilisateur";
  
 
     $requete = $this->bd->prepare('INSERT INTO utilisateur (idUtilisateur,nom, prenom, age, Date, MdP, Statut,email) 
-    VALUES (NULL, :nom, :prenom, :age, :today, :Mdp, NULL,:email)');
+    VALUES (NULL, :nom, :prenom, :age, :today, :Mdp, :utilisateur,:email)');
     $requete->execute([
         ':nom' => $nom,
         ':prenom' => $prenom,
         ':age' => $age,
         ':today' => $today,
         ':Mdp' => $Mdp,
-        ':email' => $email
+        ':email' => $email,
+        ':utilisateur'=>$utilisateur
     ]);
 
     return [

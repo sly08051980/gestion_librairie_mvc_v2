@@ -1,0 +1,1 @@
+<h1 class="text-danger">Mr HILALA </h1></br><p> Même si je suis admin le RGPD m interdit de supprimer un utilisateur</br>je peux uniquement desactiver le compte</p>

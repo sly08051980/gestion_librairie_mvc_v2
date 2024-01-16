@@ -63,4 +63,16 @@ class Controller_commandes extends Controller
         $this->render("all_commandes_find_dates",$data);
 
     }
+    public function action_modifier()
+    {
+        $m=Model::get_model();
+        $this->render("modifier");
+
+    }
+    public function action_supprimer()
+    {
+        $m=Model::get_model();
+        $this->render("supprimer");
+
+    }
 }

@@ -66,6 +66,49 @@ class Controller_fournisseurs extends Controller
         $this->render("all_fournisseurs_find_pays",$data);
 
     }
+    public function action_modifier(){
+        
+        $m=Model::get_model();
+        $idfournisseur = $_GET['id'];
+        $data = ['modifierFournisseur' => $m->get_modifier_fournisseurs($idfournisseur)];
+        $this->render("modifier_fournisseurs", $data);
+    }
 
-    
+    public function action_update_fournisseur(){
+        $m=Model::get_model();
+        $Id_fournisseur = $_POST['Id_fournisseur'];
+        $Code_fournisseur = $_POST['Code_fournisseur'];
+        $Raison_sociale = $_POST['Raison_sociale'];
+        $Rue_fournisseur = $_POST['Rue_fournisseur'];
+        $Code_postal = $_POST['Code_postal'];
+        $Localite = $_POST['Localite'];
+        $Pays = $_POST['Pays'];
+        $Tel_fournisseur = $_POST['Tel_fournisseur'];
+        $Url_fournisseur = $_POST['Url_fournisseur'];
+        $Email_fournisseur = $_POST['Email_fournisseur'];
+        $Fax_fournisseur = $_POST['Fax_fournisseur'];
+
+        $data = ['modifierFournisseur' => $m->get_update_fournisseurs($Id_fournisseur, $Code_fournisseur, $Raison_sociale, $Rue_fournisseur, $Code_postal, $Localite, $Pays, $Tel_fournisseur, $Url_fournisseur, $Email_fournisseur, $Fax_fournisseur)];
+       
+
+        if($data){
+            $data=['fournisseurs'=>$m->get_all_fournisseurs()];
+        $this->render("all_fournisseurs",$data);
+        }
+       
+    }
+
+    public function action_supprimer(){
+        
+        $m=Model::get_model();
+        $idfournisseur= $_GET['id'];
+        $data = ['supprimerFournisseur' => $m->get_supprimer_fournisseurs($idfournisseur)];
+        if($data){
+            $data=['fournisseurs'=>$m->get_all_fournisseurs()];
+            $this->render("all_fournisseurs",$data);
+        }else{
+            $this->render("error",$data);
+        }
+    }
+  
 }

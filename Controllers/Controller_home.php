@@ -44,6 +44,17 @@ class Controller_home extends Controller
     }
     public function action_utilisateurs()
     {
-        $this->render("utilisateurs");
+        $m = Model::get_model();
+
+        $data =['utilisateur'=> $m->get_utilisateur()];
+        $this->render("utilisateurs",$data);
     }
+    public function action_supprimer_utilisateur()
+    {
+        $m = Model::get_model();
+
+       
+        $this->render("supprimer_utilisateur");
+    }
+    
 }

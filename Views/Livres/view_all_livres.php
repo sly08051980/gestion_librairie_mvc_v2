@@ -41,7 +41,7 @@
             
                 <a href="?controller=livres&action=modifier&id='. $l->Id_Livre .'"">
                     <button type="submit" class="btn btn-primary btn-sm me-3"><i class="bi bi-pencil-fill"></i></button></a>
-                <a href="">
+                    <a href="?controller=livres&action=supprimer&id='. $l->Id_Livre .'"">
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmation()"><i class="bi bi-pencil-fill"></i></button></a>
             </div>
         </td>';} 
