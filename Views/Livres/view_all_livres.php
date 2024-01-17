@@ -1,4 +1,5 @@
 <div>
+    <a href = "?controller=livres&action=ajouter_livres"class="btn btn-primary">Ajouter Livre</a>
     <p> <?= isset($search)?'Recherche par '.$search:'' ?></p>
 <table id='table'class="table table-success table-striped">
     <thead>

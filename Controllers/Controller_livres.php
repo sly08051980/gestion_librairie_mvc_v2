@@ -115,4 +115,34 @@ class Controller_livres extends Controller
             $this->render("error",$data);
         }
     }
+    public function action_ajouter_livres(){
+        
+        $this->render("ajouter_livres");
+    }
+
+    public function action_ajouter_livres_enregistrement(){
+        $m=Model::get_model();
+
+        $ISBN = $_POST['ISBN'];
+        $Titre = $_POST['Titre'];
+        $Theme = $_POST['Theme'];
+        $Nbr_pages_livre = $_POST['Nbr_pages_livre'];
+        $Format_livre = $_POST['Format_livre'];
+        $Nom_auteur = $_POST['Nom_auteur'];
+        $Prenom_auteur = $_POST['Prenom_auteur'];
+        $Editeur = $_POST['Editeur'];
+        $Annee_edition = $_POST['Annee_edition'];
+        $Prix_vente = $_POST['Prix_vente'];
+        $Langue_livre = $_POST['Langue_livre'];
+
+        $data = ['modifierLivres' => $m->get_ajouter_livres_enregistrement($ISBN, $Titre, $Theme, $Nbr_pages_livre, $Format_livre, $Nom_auteur,
+         $Prenom_auteur, $Editeur, $Annee_edition, $Prix_vente, $Langue_livre)];
+
+         if($data){
+            $this->render("ajouter_livres");
+         }else{
+            $this->render("error",$data); 
+         }
+       
+    }
 }

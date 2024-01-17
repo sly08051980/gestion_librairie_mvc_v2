@@ -1,4 +1,5 @@
 <div>
+    <a href="?controller=fournisseurs&action=ajouter_fournisseurs"class="btn btn-primary">Ajout fournisseurs</a>
     <p> <?= isset($search)?'Recherche par '.$search:'' ?></p>
 <table id='table'class="table table-success table-striped">
     <thead>

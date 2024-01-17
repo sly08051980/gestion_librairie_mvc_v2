@@ -1,4 +1,5 @@
 <div>
+    <a href="?controller=commandes&action=ajouter_commandes"class="btn btn-primary">Ajouter commande</a>
     <p> <?= isset($search)?'Recherche par '.$search:'' ?></p>
 <table id='table' class="table table-success table-striped">
     <thead>

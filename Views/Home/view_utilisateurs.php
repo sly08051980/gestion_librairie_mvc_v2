@@ -29,7 +29,7 @@
         <td>
             <div class="d-flex flex-row">
             
-                <a href="?controller=home&action=modifier&id='. $u->idUtilisateur .'"">
+                <a href="?controller=home&action=modifier_utilisateur&id='. $u->idUtilisateur .'"">
                     <button type="submit" class="btn btn-primary btn-sm me-3"><i class="bi bi-pencil-fill"></i></button></a>
                     <a href="?controller=home&action=supprimer_utilisateur&id='. $u->idUtilisateur .'"">
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmation()"><i class="bi bi-pencil-fill"></i></button></a>

@@ -110,5 +110,35 @@ class Controller_fournisseurs extends Controller
             $this->render("error",$data);
         }
     }
-  
+    public function action_ajouter_fournisseurs(){
+        
+        $this->render("ajouter_fournisseurs");
+    }
+    public function action_ajouter_fournisseurs_enregistrement(){
+        $m = Model::get_model();
+    
+        $Code_fournisseur = $_POST['Code_fournisseur'];
+        $Raison_sociale = $_POST['Raison_sociale'];
+        $Rue_fournisseur = $_POST['Rue_fournisseur'];
+        $Code_postal = $_POST['Code_postal'];
+        $Localite = $_POST['Localite'];
+        $Pays = $_POST['Pays'];
+        $Tel_fournisseur = $_POST['Tel_fournisseur'];
+        $Url_fournisseur = $_POST['Url_fournisseur'];
+        $Email_fournisseur = $_POST['Email_fournisseur'];
+    
+        $data = [
+            'modifierFournisseur' => $m->get_ajouter_fournisseur_enregistrement(
+                $Code_fournisseur, $Raison_sociale, $Rue_fournisseur, $Code_postal, $Localite,
+                $Pays, $Tel_fournisseur, $Url_fournisseur, $Email_fournisseur
+            )
+        ];
+    
+        if($data){
+            $this->render("ajouter_fournisseurs");
+        } else {
+            $this->render("error", $data);
+        }
+    }
+
 }

@@ -75,4 +75,33 @@ class Controller_commandes extends Controller
         $this->render("supprimer");
 
     }
+    public function action_ajouter_commandes(){
+        $m=Model::get_model();
+        $data = [
+            'allLivres' => $m->get_all_livres(),
+            'allFournisseurs' => $m->get_all_fournisseurs()
+        ];
+        $this->render("ajouter_commandes",$data);
+    }
+    public function action_ajouter_commandes_commandes(){
+        $m = Model::get_model();
+    
+    $Id_Livre = $_POST['Id_Livre'];
+    $Id_fournisseur = $_POST['Id_fournisseur'];
+    $Date_achat = $_POST['Date_achat'];
+    $Prix_achat = $_POST['Prix_achat'];
+    $Nbr_exemplaires = $_POST['Nbr_exemplaires'];
+    
+    $data = [
+        'ajouterCommande' => $m->get_ajouter_commande_commandes(
+            $Id_Livre, $Id_fournisseur, $Date_achat, $Prix_achat, $Nbr_exemplaires
+        )
+    ];
+    
+    if($data){
+        $this->render("ajouter_commandes");
+    } else {
+        $this->render("error", $data);
+    }
+    }
 }
